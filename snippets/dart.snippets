@@ -1,0 +1,79 @@
+snippet screen "Scaffold a new screen"
+ import 'package:flutter/material.dart';
+
+ class ${1}Screen extends StatelessWidget {
+   const ${1}Screen({Key? key}) : super(key: key);
+
+   @override
+   Widget build(BuildContext context) {
+     return const Scaffold(
+       body: CustomScrollView(
+         slivers: [],
+       ),
+     );
+   }
+ }
+
+snippet stateprovider "New Basic State Provider"
+ import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+ final ${1}Provider = StateProvider<${2}?>((ref) => ${3});
+
+snippet futureprovider "New Basic Future Provider"
+ import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+ final ${1}Provider = FutureProvider<${2}>((ref) async {
+   return ${3};
+ });
+
+snippet statenotifier "New Basic State Notifier"
+ import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+ final ${1}Provider = StateNotifierProvider<${2}, ${3}>((ref) => ${2}());
+
+ class ${2} extends StateNotifier<${3}> {
+   ${2}() : super(${3});
+ }
+
+snippet importM "Import Material"
+ import 'package:flutter/material.dart';
+
+snippet importR "Import Riverpod"
+ import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+snippet consumerWidget "Consumer Widget"
+ class $1 extends ConsumerWidget {
+   const $1({Key? key}) : super(key: key);
+
+   @override
+   Widget build(BuildContext context, WidgetRef ref) {
+     return Container();
+   }
+ }
+
+snippet statefulwidget "Scaffold Stateful Widget"
+ class $1 extends StatefulWidget {
+   const $1({Key? key}) : super(key: key);
+
+   @override
+   State<${1}> createState() => _${1}State();
+ }
+
+ class _${1}State extends State<$1> {
+   @override
+   Widget build(BuildContext context) {
+     return Scaffold(
+       body: Container(),
+     );
+   }
+ }
+
+snippet statelesswidget "Stateless Widget"
+ class $1 extends StatelessWidget {
+	 const $1({Key? key}) : super(key: key);
+
+	 @override
+	 Widget build(BuildContext context) {
+		 return Container();
+	 }
+ }
