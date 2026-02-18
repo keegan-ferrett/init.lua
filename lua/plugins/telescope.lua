@@ -8,7 +8,15 @@ return {
     },
 
     config = function()
-        require('telescope').setup({})
+        require('telescope').setup({
+          extensions = {
+            file_browser = {
+              grouped = true,
+              auto_depth = true,
+              files = true,
+            },
+          },
+        })
 
         local opts = { noremap = true, silent = true }
         local builtin = require('telescope.builtin')
@@ -17,7 +25,7 @@ return {
         vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>', opts)
         vim.keymap.set('n', '<leader>fr', '<cmd>Telescope resume<cr>', opts)
         vim.keymap.set('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', opts)
-
+        vim.keymap.set("n", "<space>ft", ":Telescope file_browser path=%:p:h select_buffer=true<CR>")
         vim.keymap.set('n', '<leader>gf', builtin.git_files, {})
     end
 }

@@ -1,0 +1,53 @@
+snippet main "Main Function"
+ package main
+
+ import "fmt"
+
+ func main() {
+   fmt.Println("Hello, World!")
+ }
+
+snippet func "Function"
+ func ${1:FunctionName}(${2:args}) ${3:returnType} {
+   ${4:// implementation}
+ }
+
+snippet if "If Statement"
+ if ${1:condition} {
+   ${2:// code}
+ }
+
+snippet for "For Loop"
+ for ${1:i := 0; i < 10; i++} {
+   ${2:// code}
+ }
+
+snippet struct "Struct Definition"
+ type ${1:StructName} struct {
+   ${2:FieldName} ${3:FieldType}
+ }
+
+snippet method "Method Definition"
+ func (${1:receiver} *${2:TypeName}) ${3:MethodName}(${4:args}) ${5:returnType} {
+   ${6:// implementation}
+ }
+
+snippet interface "Interface Definition"
+ type ${1:InterfaceName} interface {
+   ${2:MethodName}(${3:args}) ${4:returnType}
+ }
+
+snippet import "Import Package"
+ import (
+   "${1:package}"
+ )
+
+snippet error "Error Handling"
+ if err != nil {
+   return ${1:nil}, err
+ }
+
+snippet test "Test Function"
+ func Test${1:FunctionName}(t *testing.T) {
+   ${2:// test implementation}
+ }

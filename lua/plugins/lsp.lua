@@ -20,54 +20,84 @@ return {
       require("fidget").setup({})
 
       -- Basic LSP setups
-      lspconfig.gopls.setup{}
-      lspconfig.angularls.setup{}
-      lspconfig.html.setup{}
-      lspconfig.tailwindcss.setup{}
-      lspconfig.dartls.setup{}
-      lspconfig.pyright.setup{}
+      -- vim.lsp.config('gopls', {})
+      -- vim.lsp.config('angularls', {})
+      -- vim.lsp.config('html', {})
+      -- vim.lsp.config('tailwindcss', {})
+      vim.lsp.enable('dartls')
+      vim.lsp.enable('pyright')
+      vim.lsp.enable('ts_ls')
+      vim.lsp.enable('gopls')
+      -- vim.lsp.enable('ts_ls')
+      -- vim.lsp.config('pyright', {
+      --   cmd = { 'pyright-langserver', '--stdio' },
+      --   filetypes = { 'python' },
+      --   capabilities = capabilities,
+      --   root_markers = {
+      --     'pyproject.toml',
+      --     'setup.py',
+      --     'setup.cfg',
+      --     'requirements.txt',
+      --     'Pipfile',
+      --     'pyrightconfig.json',
+      --     '.git',
+      --   },
+      -- })
       
       -- Vue setup
-      lspconfig.volar.setup{
-        filetypes = { 'vue' },
-      }
-
+      -- lspconfig.volar.setup{
+      --   filetypes = { 'vue' },
+      -- }
+      --
       -- LSP setups with capabilities
-      lspconfig.angularls.setup {
-        capabilities = capabilities,
-      }
+      -- lspconfig.angularls.setup {
+      --   capabilities = capabilities,
+      -- }
 
-      lspconfig.tailwindcss.setup {
-        capabilities = capabilities,
-      }
+      -- lspconfig.tailwindcss.setup {
+      --   filetypes = { 'css' },
+      --   capabilities = capabilities,
+      -- }
 
-      lspconfig.html.setup {
-        capabilities = capabilities,
-      }
+      -- lspconfig.html.setup {
+      --   capabilities = capabilities,
+      -- }
 
-      lspconfig.dartls.setup {
-        capabilities = capabilities,
-      }
+      -- vim.lsp.config('dartls', {
+      --   capabilities = capabilities,
+      -- }
 
-        -- TypeScript setup
-      lspconfig.ts_ls.setup {
-        filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-        init_options = {
-          plugins = {
-            {
-              name = "@vue/typescript-plugin",
-              location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
-              languages = {"javascript", "typescript", "vue"},
-            },
-          },
-        },
-        capabilities = capabilities,
-      }
+      -- TypeScript setup
+      -- lspconfig.ts_ls.setup {
+      --   filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact' },
+      --   init_options = {
+      --     plugins = {
+      --       {
+      --         name = "@vue/typescript-plugin",
+      --         location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+      --         languages = {"javascript", "typescript", "vue"},
+      --       },
+      --     },
+      --   },
+      --   capabilities = capabilities,
+      -- }
 
       -- Rust setup
-      lspconfig.rust_analyzer.setup {
-        capabilities = capabilities,
-      }
+      -- lspconfig.rust_analyzer.setup {
+      --   capabilities = capabilities,
+      -- }
+
+      vim.api.nvim_create_autocmd('ModeChanged', {
+        pattern = '*',
+        callback = function()
+          if ((vim.v.event.old_mode == 's' and vim.v.event.new_mode == 'n') or vim.v.event.old_mode == 'i')
+              and require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+              and not require('luasnip').session.jump_active
+          then
+            require('luasnip').unlink_current()
+          end
+        end
+      })
 
       -- LSP keybindings
       vim.api.nvim_create_autocmd('LspAttach', {
